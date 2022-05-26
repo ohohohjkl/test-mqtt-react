@@ -35,14 +35,16 @@ function App() {
 
     console.log(TRUSTED_CA_LIST);
 
-    const record = { ...hostDevWS, ...secretInfo };
+    const record = { ...hostDevWSS, ...secretInfo };
 
     const url = `${record.protocol}://${record.host}:${record.port}/mqtt`;
 
     const options = {
       protocol: record.protocol,
-      checkServerIdentity: true,
-      ca: TRUSTED_CA_LIST,
+      // checkServerIdentity: true,
+      // ca: TRUSTED_CA_LIST,
+
+      rejectUnauthorized: false,
       ...secretInfo,
     };
 
@@ -75,6 +77,10 @@ function App() {
     exampleFileReader.readAsText(blob);
   };
 
+  const refreshPage = () => {
+    window.location.reload(false);
+  };
+
   return (
     <div className="App">
       <header className="App-header">
@@ -83,6 +89,7 @@ function App() {
           Edit <code>src/App.js</code> and save to reload.
         </p>
         <button onClick={onHandleConnectHMQTT}>COnnect</button>
+        <button onClick={refreshPage}>Refresh</button>
       </header>
     </div>
   );
