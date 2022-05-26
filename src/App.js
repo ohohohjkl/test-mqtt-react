@@ -40,7 +40,7 @@ function App() {
     const url = `${record.protocol}://${record.host}:${record.port}/mqtt`;
 
     const options = {
-      protocol: "wss",
+      protocol: record.protocol,
       checkServerIdentity: true,
       ca: TRUSTED_CA_LIST,
       ...secretInfo,
